@@ -19,14 +19,17 @@ await connectDB()
 await connectCloudinary()
 
 // Allow multiple origins
-const allowedOrigins = ['http://localhost:5173', 'https://green-cart-mern.vercel.app']
+// const allowedOrigins = ['http://localhost:5173', 'https://green-cart-mern.vercel.app']
+//allow for all routes
+// const allowedOrigins = ['http://localhost:5173', 'https://greencart-mern.vercel.app', 'https://greencart-mern.vercel.app/'];
 
 app.post('/stripe', express.raw({type: 'application/json'}), stripeWebhooks)
 
 // Middleware configuration
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({origin: allowedOrigins, credentials: true}));
+// app.use(cors({origin: allowedOrigins, credentials: true}));
+app.use(cors());  // Allow all origins for development purposes
 
 
 app.get('/', (req, res) => res.send("API is Working"));
